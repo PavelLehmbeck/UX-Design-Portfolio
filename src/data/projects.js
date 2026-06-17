@@ -1,0 +1,32 @@
+export const projects = [
+  {
+    id: 1,
+    slug: 'cookie-thesis',
+    number: '01',
+    name: 'Cookie Thesis',
+    title: 'Do you also hate cookies?',
+    description: 'A short description of what this project was about and the problem it solved. What was your role, and what was the outcome?',
+    tags: ['Research', 'UI Design'],
+    color: '#f0ede8',
+  },
+  {
+    id: 2,
+    slug: 'trustable',
+    number: '02',
+    name: 'Trustable',
+    title: 'Would you feel safer with self driving cars?',
+    description: 'A short description of what this project was about and the problem it solved. What was your role, and what was the outcome?',
+    tags: ['UX Strategy', 'Prototyping'],
+    color: '#e8edf0',
+  },
+  {
+    id: 3,
+    slug: 'designflows',
+    number: '03',
+    name: 'Designflows',
+    title: 'What can you design in 4 days?',
+    description: 'A short description of what this project was about and the problem it solved. What was your role, and what was the outcome?',
+    tags: ['Mobile', 'Design System'],
+    color: '#ede8f0',
+  },
+]
