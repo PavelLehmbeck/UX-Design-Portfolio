@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar'
 import Hero from '../components/Hero'
 import Work from '../components/Work'
 import About from '../components/About'
+import Beyond from '../components/Beyond'
 import Contact from '../components/Contact'
 
 export default function Portfolio() {
@@ -13,9 +14,10 @@ export default function Portfolio() {
       <Nav />
       <Sidebar />
       <main ref={mainRef}>
-        <Hero />
+        <Hero mainRef={mainRef} />
         <Work mainRef={mainRef} />
         <About />
+        <Beyond />
         <Contact />
       </main>
     </>

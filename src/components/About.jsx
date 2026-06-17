@@ -32,11 +32,12 @@ export default function About() {
 const styles = {
   section: {
     height: '100vh',
-    scrollSnapAlign: 'start',
+    position: 'relative',
+    zIndex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: '80px 48px 48px',
+    padding: '80px 64px 48px',
     background: '#f7f7f5',
   },
   inner: {

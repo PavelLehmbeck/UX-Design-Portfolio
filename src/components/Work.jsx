@@ -52,6 +52,9 @@ export default function Work({ mainRef }) {
 const styles = {
   section: {
     height: '600vh',
+    position: 'relative',
+    zIndex: 1,
+    background: '#fff',
   },
   snapAnchor: {
     height: 0,

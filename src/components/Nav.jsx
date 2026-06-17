@@ -31,6 +31,7 @@ export default function Nav() {
       <div style={styles.links}>
         <a href="#work" style={styles.link}>Work</a>
         <a href="#about" style={styles.link}>About</a>
+        <a href="#beyond" style={styles.link}>Beyond</a>
         <a href="#contact" style={styles.link}>Contact</a>
       </div>
     </motion.nav>
@@ -42,7 +43,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '24px 48px',
+    padding: '24px 64px',
     position: 'fixed',
     top: 0,
     left: 0,

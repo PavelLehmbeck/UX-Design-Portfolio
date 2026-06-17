@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const sections = [
-  { id: 'hero', label: 'Home', threshold: 0.5 },
-  { id: 'work', label: 'Work', threshold: 0.1 },
-  { id: 'about', label: 'About', threshold: 0.5 },
-  { id: 'contact', label: 'Contact', threshold: 0.5 },
+  { id: 'hero', label: 'Home' },
+  { id: 'work', label: 'Work' },
+  { id: 'about', label: 'About' },
+  { id: 'beyond', label: 'Beyond' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 export default function Sidebar() {
@@ -15,7 +16,7 @@ export default function Sidebar() {
     const root = document.querySelector('main')
     const observers = []
 
-    sections.forEach(({ id, threshold }) => {
+    sections.forEach(({ id }) => {
       const el = document.getElementById(id)
       if (!el) return
 
@@ -23,7 +24,7 @@ export default function Sidebar() {
         ([entry]) => {
           if (entry.isIntersecting) setActive(id)
         },
-        { threshold, root }
+        { root, rootMargin: '-50% 0px -50% 0px', threshold: 0 }
       )
       observer.observe(el)
       observers.push(observer)

@@ -20,7 +20,6 @@ html, body {
 main {
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y proximity; 
   scroll-behavior: smooth;
 }
 

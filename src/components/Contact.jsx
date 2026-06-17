@@ -34,11 +34,13 @@ export default function Contact() {
 const styles = {
   section: {
     height: '100vh',
-    scrollSnapAlign: 'start',
+    position: 'relative',
+    zIndex: 1,
+    background: '#fff',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: '80px 48px 48px',
+    padding: '80px 64px 48px',
   },
   heading: {
     fontSize: '2rem',
