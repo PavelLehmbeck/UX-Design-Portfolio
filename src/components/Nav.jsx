@@ -1,29 +1,10 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 export default function Nav() {
-  const [hidden, setHidden] = useState(false)
-
-  useEffect(() => {
-    const main = document.querySelector('main')
-    if (!main) return
-
-    let lastY = 0
-
-    const onScroll = () => {
-      const y = main.scrollTop
-      setHidden(y > lastY && y > 80)
-      lastY = y
-    }
-
-    main.addEventListener('scroll', onScroll, { passive: true })
-    return () => main.removeEventListener('scroll', onScroll)
-  }, [])
-
   return (
     <motion.nav
       initial={{ y: '-100%', opacity: 0 }}
-      animate={{ y: hidden ? '-100%' : 0, opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.25, 0, 0, 1] }}
       style={styles.nav}
     >
@@ -49,12 +30,12 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: 'rgba(255,255,255,0.9)',
-    backdropFilter: 'blur(10px)',
+    background: 'transparent',
   },
   logo: {
-    fontWeight: 600,
+    fontWeight: 700,
     fontSize: '1rem',
+    color: '#fff',
   },
   links: {
     display: 'flex',
@@ -62,7 +43,8 @@ const styles = {
   },
   link: {
     textDecoration: 'none',
-    color: '#333',
+    color: '#fff',
+    fontWeight: 700,
     fontSize: '0.9rem',
   },
 }

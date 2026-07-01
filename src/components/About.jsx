@@ -1,71 +1,133 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { heroPhrases } from '../data/heroPhrases'
+import profileImg from '../assets/profileimg.jpg'
 
-export default function About() {
+export default function About({ opacity, scale, y }) {
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const nextPhrase = () => setPhraseIndex(i => (i + 1) % heroPhrases.length)
+
   return (
-    <section id="about" style={styles.section}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        style={styles.inner}
-      >
-        <h2 style={styles.heading}>About me</h2>
-        <p style={styles.bio}>
-          I'm a UX designer based in [Your City]. I help teams build digital products that
-          people actually enjoy using — by combining research, systems thinking, and a
-          strong visual sensibility.
-        </p>
-        <p style={styles.bio}>
-          Outside of design, I [your hobbies / interests here].
-        </p>
-        <div style={styles.skills}>
-          {['User Research', 'Interaction Design', 'Prototyping', 'Design Systems', 'Figma', 'Usability Testing'].map(skill => (
-            <span key={skill} style={styles.skill}>{skill}</span>
-          ))}
-        </div>
-      </motion.div>
-    </section>
+    <motion.section style={{ ...styles.section, opacity, scale, y }}>
+      <motion.img
+        src={profileImg}
+        alt="Pavel Lehmbeck"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        style={styles.photo}
+      />
+      <div style={styles.textColumn}>
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          style={styles.heading}
+        >
+          Hi. I am a UX Designer <br />that loves
+          <motion.button
+            type="button"
+            onClick={nextPhrase}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            style={styles.cta}
+          >
+            Next
+          </motion.button>
+          <br />
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={heroPhrases[phraseIndex]}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              style={styles.phrase}
+            >
+              {heroPhrases[phraseIndex]}
+            </motion.span>
+          </AnimatePresence>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          style={styles.bio}
+        >
+          Placeholder text goes here. This is where a short continuing bio about my
+          background, approach, and experience will live.
+        </motion.p>
+      </div>
+    </motion.section>
   )
 }
 
 const styles = {
   section: {
-    height: '100vh',
-    position: 'relative',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
     zIndex: 1,
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '80px 64px 48px',
-    background: '#f7f7f5',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '48px',
+    padding: '0 64px',
+    maxWidth: '900px',
   },
-  inner: {
-    maxWidth: '680px',
+  photo: {
+    width: '200px',
+    aspectRatio: '9 / 16',
+    objectFit: 'cover',
+    borderRadius: '12px',
+    flexShrink: 0,
+    display: 'block',
+  },
+  textColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   },
   heading: {
-    fontSize: '2rem',
+    fontSize: 'clamp(1rem, 3vw, 2rem)',
     fontWeight: 700,
+    lineHeight: 1.1,
     marginBottom: '24px',
-    color: '#111',
+    color: '#fff',
+    textAlign: 'right',
+  },
+  phrase: {
+    display: 'inline-block',
+    color: '#90EE90',
+  },
+  cta: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    verticalAlign: 'middle',
+    marginLeft: '16px',
+    padding: '6px 16px',
+    fontSize: '0.85rem',
+    background: 'transparent',
+    border: '1px solid #888',
+    color: '#888',
+    textDecoration: 'none',
+    borderRadius: '8px',
+    fontWeight: 500,
+    width: 'fit-content',
   },
   bio: {
-    fontSize: '1.1rem',
-    color: '#444',
-    lineHeight: 1.8,
-    marginBottom: '16px',
-  },
-  skills: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '10px',
-    marginTop: '32px',
-  },
-  skill: {
-    padding: '8px 16px',
-    border: '1px solid #ddd',
-    borderRadius: '100px',
-    fontSize: '0.85rem',
-    color: '#333',
+    marginTop: '24px',
+    fontSize: 'clamp(1rem, 3vw, 2rem)',
+    fontWeight: 700,
+    color: '#fff',
+    lineHeight: 1.1,
+    maxWidth: '50vw',
+    textAlign: 'right',
   },
 }

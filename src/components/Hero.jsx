@@ -1,96 +1,53 @@
-import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { heroPhrases } from '../data/heroPhrases'
+import { motion, useTransform } from 'framer-motion'
+import heroImage from '../assets/hero.png'
 
-export default function Hero({ mainRef }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    container: mainRef,
-    offset: ['start start', 'end start'],
-  })
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
-
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const nextPhrase = () => setPhraseIndex(i => (i + 1) % heroPhrases.length)
+export default function Hero({ opacity, blur }) {
+  const filter = useTransform(blur, (v) => `blur(${v}px) brightness(${1 - (v / 15) * 0.4})`)
 
   return (
-    <section id="hero" ref={ref} style={styles.section}>
-      <motion.div style={{ ...styles.sticky, opacity, scale }}>
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          style={styles.heading}
-        >
-          UX Designer <br />that loves<br />
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={heroPhrases[phraseIndex]}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.3 }}
-              style={styles.phrase}
-            >
-              {heroPhrases[phraseIndex]}
-            </motion.span>
-          </AnimatePresence>
-        </motion.h1>
-        <motion.button
-          type="button"
-          onClick={nextPhrase}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          style={styles.cta}
-        >
-          Next
-        </motion.button>
-      </motion.div>
-    </section>
+    <motion.section style={{ ...styles.section, opacity, filter }}>
+      <img src={heroImage} alt="" style={styles.image} />
+      <h1 style={styles.title}>Value comes from design</h1>
+      <h2 style={styles.subtitle}>Which starts with understanding people</h2>
+    </motion.section>
   )
 }
 
 const styles = {
   section: {
-    height: '100vh',
-  },
-  sticky: {
-    position: 'sticky',
-    top: 0,
-    height: '100vh',
+    position: 'absolute',
+    top: '-30px',
+    left: '-30px',
+    right: '-30px',
+    bottom: '-30px',
     zIndex: 0,
-    background: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '0 64px',
-    maxWidth: '900px',
   },
-  heading: {
-    fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block',
+  },
+  title: {
+    position: 'absolute',
+    top: '35%',
+    left: '5%',
+    transform: 'translateY(-50%)',
+    margin: 0,
+    color: '#fff',
+    fontSize: '6rem',
     fontWeight: 700,
-    lineHeight: 1.1,
-    marginBottom: '24px',
-    color: '#111',
+    maxWidth: '40%',
   },
-  phrase: {
-    display: 'inline-block',
-    color: '#B82A2A',
-  },
-  cta: {
-    display: 'inline-block',
-    padding: '14px 32px',
-    background: 'transparent',
-    border: '1px solid #888',
-    color: '#888',
-    textDecoration: 'none',
-    borderRadius: '8px',
-    fontWeight: 500,
-    width: 'fit-content',
+  subtitle: {
+    position: 'absolute',
+    top: '110%',
+    left: '5%',
+    transform: 'translateY(-50%)',
+    margin: 0,
+    color: '#fff',
+    fontSize: '1.25rem',
+    fontWeight: 700,
+    maxWidth: '40%',
   },
 }

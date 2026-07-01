@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const sections = [
-  { id: 'hero', label: 'Home' },
-  { id: 'work', label: 'Work' },
+  { id: 'hero1', label: 'Home' },
   { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
   { id: 'beyond', label: 'Beyond' },
   { id: 'contact', label: 'Contact' },
 ]
 
 export default function Sidebar() {
-  const [active, setActive] = useState('hero')
+  const [active, setActive] = useState('hero1')
 
   useEffect(() => {
     const root = document.querySelector('main')
